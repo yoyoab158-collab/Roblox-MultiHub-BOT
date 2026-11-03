@@ -51,7 +51,8 @@ Yes. No ads, subscriptions, or paywalls. The full source code is included.""", c
     embed8 = discord.Embed(description="""📂 **Which operating systems are supported?**  
 Windows.""", color=ACCENT)
 
-    await interaction.response.send_message(embeds=[embed1, embed2, embed3, embed4, embed5, embed6, embed7, embed8])
+    await interaction.response.send_message("✅ Sent!", ephemeral=True)
+    await interaction.channel.send(embeds=[embed1, embed2, embed3, embed4, embed5, embed6, embed7, embed8])
 
 
 # ──────────────── /download ────────────────
@@ -133,9 +134,9 @@ async def features_command(interaction: discord.Interaction):
 - Discord icon + donation link, foldable Help page""", color=ACCENT)
 
     # Discord allows max 10 embeds per message, so the 11th goes in a follow-up message
-    await interaction.response.send_message(embeds=[embed1, embed2, embed3, embed4, embed5, embed6, embed7, embed8, embed9, embed10])
-    await interaction.followup.send(embeds=[embed11])
-
+    await interaction.response.send_message("✅ Sent!", ephemeral=True)
+    await interaction.channel.send(embeds=[embed1, embed2, embed3, embed4, embed5, embed6, embed7, embed8, embed9, embed10])
+    await interaction.channel.send(embeds=[embed11])
 
 # ──────────────── /tutorial ────────────────
 @bot.tree.command(name="tutorial", description="📚 Learn how to get started")
@@ -143,20 +144,21 @@ async def tutorial_command(interaction: discord.Interaction):
     embed1 = discord.Embed(description="""📚 **Tutorial**
     SOON""", color=ACCENT)
 
-    await interaction.response.send_message(embeds=[embed1])
-
+    await interaction.response.send_message("✅ Sent!", ephemeral=True)
+    await interaction.channel.send(embeds=[embed1])
 
 # ──────────────── /dlpanel ────────────────
 @bot.tree.command(name="dlpanel", description="📥 Download panel")
 async def dlpanel_command(interaction: discord.Interaction):
     embed1 = discord.Embed(description="""🚀 **Roblox MultiHub** — launch all your Roblox alts at once, free & open source.
 
-🌐 Website: https://roblox-multihub.vosje-brecht.workers.dev/
-⬇️ Download: https://github.com/Roblox-MultiHub/Roblox-MultiHub/raw/main/download/RobloxMultiHub.zip
-
 Unzip → run Install RobloxMultiHub.bat → add accounts → Launch. Use your own accounts!""", color=SUCCESS)
-
-    await interaction.response.send_message(embeds=[embed1])
+    view = discord.ui.View()
+    view.add_item(discord.ui.Button(label="Download", emoji="📥", style=discord.ButtonStyle.link, url="https://github.com/Roblox-MultiHub/Roblox-MultiHub/releases"))
+    view.add_item(discord.ui.Button(label="Website", emoji="🌐", style=discord.ButtonStyle.link, url="https://roblox-multihub.vosje-brecht.workers.dev/"))
+   
+    await interaction.response.send_message("✅ Sent!", ephemeral=True)
+    await interaction.channel.send(embeds=[embed1], view=view)
 
 
 if __name__ == "__main__":
